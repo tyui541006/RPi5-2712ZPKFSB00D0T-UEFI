@@ -1,0 +1,20 @@
+[Defines]
+  INF_VERSION    = 0x0001001B
+  BASE_NAME      = RPi5DPlatformLib
+  FILE_GUID      = 8D7E9F3D-8F8C-4C5D-9A1C-3E2D1F0B5A4E
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = PlatformLib
+
+[Sources]
+  PlatformLibMem.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  ArmPlatformPkg/ArmPlatformPkg.dec
+
+[LibraryClasses]
+  DebugLib
+  IoLib
+  ArmLib

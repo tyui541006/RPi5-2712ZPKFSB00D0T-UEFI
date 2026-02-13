@@ -1,0 +1,42 @@
+## @file
+#  RP1 XHCI USB 3.0 Controller Driver for Raspberry Pi 5 D-step
+#
+#  Copyright (c) 2026, Your Name Here
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = Rp1XhciDxe
+  FILE_GUID                      = A1B2C3D4-E5F6-7890-1234-567890ABCDEF
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = Rp1XhciDriverEntryPoint
+
+[Sources]
+  Rp1XhciDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  IoLib
+  BaseMemoryLib
+  TimerLib
+  MemoryAllocationLib
+
+[Protocols]
+  gEfiUsb2HcProtocolGuid
+  gEfiDevicePathProtocolGuid
+  gEfiPciIoProtocolGuid
+
+[Depex]
+  TRUE
+  
+[BuildOptions]
+  GCC:*_*_*_CC_FLAGS = -Wno-error

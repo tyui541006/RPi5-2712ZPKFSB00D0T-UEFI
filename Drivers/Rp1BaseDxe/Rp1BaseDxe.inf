@@ -1,0 +1,36 @@
+## @file
+#  RP1 Southbridge Base Driver for Raspberry Pi 5 D-step
+#
+#  Copyright (c) 2026, Your Name Here
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = Rp1BaseDxe
+  FILE_GUID                      = 8D2F9A1B-3C4D-5E6F-7A8B-9C091E2F3A4B
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = Rp1BaseDriverEntryPoint
+
+[Sources]
+  Rp1BaseDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+  ArmPkg/ArmPkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  IoLib
+  ArmLib
+
+[Protocols]
+  gEfiCpuIo2ProtocolGuid
+
+[Depex]
+  TRUE

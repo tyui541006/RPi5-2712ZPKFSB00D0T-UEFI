@@ -1,0 +1,37 @@
+#/** @file
+#  Display DXE driver for Raspberry Pi 5 D-step
+#
+#  Copyright (c) 2026, TW045261
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+#**/
+
+[Defines]
+  INF_VERSION                    = 0x0001001B
+  BASE_NAME                      = RPi5DDisplayDxe
+  FILE_GUID                      = 8D9F1F9A-7A3F-4E8F-8D1E-2F3A4B5C6E4F
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = InitializeDisplayDxe
+
+[Sources]
+  DisplayDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  DebugLib
+  BaseMemoryLib
+  MemoryAllocationLib
+  DevicePathLib
+
+[Protocols]
+  gEfiGraphicsOutputProtocolGuid
+  gEfiDevicePathProtocolGuid
+
+[Depex]
+  TRUE

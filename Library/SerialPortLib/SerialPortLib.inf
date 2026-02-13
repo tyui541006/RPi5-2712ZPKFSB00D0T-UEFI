@@ -1,0 +1,24 @@
+[Defines]
+  INF_VERSION    = 0x0001001B
+  BASE_NAME      = RPi5DSerialPortLib
+  FILE_GUID      = 9E7B3F5C-1A2D-4E6F-8B3C-5D7E9F1A2C4F
+  MODULE_TYPE    = BASE
+  VERSION_STRING = 1.0
+  LIBRARY_CLASS  = SerialPortLib
+
+[Sources]
+  SerialPortLib.c
+
+# [Sources.AARCH64]
+#   AArch64/Helper.S
+
+[Packages]
+  MdePkg/MdePkg.dec
+  ArmPkg/ArmPkg.dec
+  ArmPlatformPkg/ArmPlatformPkg.dec
+
+[LibraryClasses]
+  PcdLib
+  IoLib
+  ArmPlatformLib
+

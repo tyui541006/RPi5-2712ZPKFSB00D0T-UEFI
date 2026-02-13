@@ -1,0 +1,99 @@
+[FD.RPI5D_EFI]
+BaseAddress   = 0x00000000
+Size          = 0x00400000
+ErasePolarity = 1
+BlockSize     = 0x00001000
+NumBlocks     = 0x400
+
+0x00000000|0x00400000
+gArmTokenSpaceGuid.PcdFvBaseAddress|gArmTokenSpaceGuid.PcdFvSize
+FV = FV
+
+[FV.FV]
+FvNameGuid         = 5D5A5C5B-4A3F-4F2E-8D1E-2F3A4B5C6D7E
+BlockSize          = 0x00001000
+FvAlignment        = 8
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+STICKY_WRITE       = TRUE
+LOCK_CAP           = TRUE
+LOCK_STATUS        = TRUE
+WRITE_DISABLED_CAP = FALSE
+WRITE_ENABLED_CAP  = TRUE
+WRITE_STATUS       = TRUE
+WRITE_LOCK_CAP     = FALSE
+WRITE_LOCK_STATUS  = FALSE
+READ_DISABLED_CAP  = FALSE
+READ_ENABLED_CAP   = TRUE
+READ_STATUS        = TRUE
+READ_LOCK_CAP      = FALSE
+READ_LOCK_STATUS   = FALSE
+
+  INF ArmPlatformPkg/PrePi/PrePi.inf
+
+[FV.FVMAIN]
+FvNameGuid         = 8C2F8F4D-1A2B-4C3D-9E5F-6A7B8C9D0E1F
+BlockSize          = 0x00001000
+FvAlignment        = 8
+ERASE_POLARITY     = 1
+MEMORY_MAPPED      = TRUE
+
+  INF MdeModulePkg/Core/Dxe/DxeMain.inf
+  INF MdeModulePkg/Universal/SerialDxe/SerialDxe.inf
+  INF MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
+  INF Platform/RaspberryPi/RPi5D/Drivers/DisplayDxe/DisplayDxe.inf
+  INF Platform/RaspberryPi/RPi5D/Drivers/Rp1BaseDxe/Rp1BaseDxe.inf
+  INF Platform/RaspberryPi/RPi5D/Drivers/Rp1XhciDxe/Rp1XhciDxe.inf
+  
+  FILE RAW = 9E8F1F9A-7A3F-4E8F-8D1E-2F3A4B5C6E5F {
+    /home/tw045261/edk2/edk2-platforms/Platform/RaspberryPi/RPi5D/AcpiTables/Dsdt.aml
+  }
+  
+  FILE RAW = EB5D4B3A-2F8C-4A3B-9F6D-8C1E2D4F6A8B {
+    /home/tw045261/edk2/edk2-platforms/Platform/RaspberryPi/RPi5D/AcpiTables/Madt.aml
+  }
+
+[Rule.Common.SEC]
+  FILE SEC = $(NAMED_GUID) {
+    PE32     PE32   $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI       STRING ="$(MODULE_NAME)" Optional
+    VERSION  STRING ="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
+
+[Rule.Common.DXE_CORE]
+  FILE DXE_CORE = $(NAMED_GUID) {
+    PE32     PE32   $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI       STRING ="$(MODULE_NAME)" Optional
+    VERSION  STRING ="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
+
+[Rule.Common.DXE_DRIVER]
+  FILE DRIVER = $(NAMED_GUID) {
+    DXE_DEPEX    DXE_DEPEX Optional      $(INF_OUTPUT)/$(MODULE_NAME).depex
+    PE32         PE32                    $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI           STRING="$(MODULE_NAME)" Optional
+    VERSION      STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
+
+[Rule.Common.DXE_RUNTIME_DRIVER]
+  FILE DRIVER = $(NAMED_GUID) {
+    DXE_DEPEX    DXE_DEPEX Optional      $(INF_OUTPUT)/$(MODULE_NAME).depex
+    PE32         PE32                    $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI           STRING="$(MODULE_NAME)" Optional
+    VERSION      STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
+
+[Rule.Common.UEFI_DRIVER]
+  FILE DRIVER = $(NAMED_GUID) {
+    DXE_DEPEX    DXE_DEPEX Optional      $(INF_OUTPUT)/$(MODULE_NAME).depex
+    PE32         PE32                    $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI           STRING="$(MODULE_NAME)" Optional
+    VERSION      STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
+
+[Rule.Common.UEFI_APPLICATION]
+  FILE APPLICATION = $(NAMED_GUID) {
+    PE32         PE32                    $(INF_OUTPUT)/$(MODULE_NAME).efi
+    UI           STRING="$(MODULE_NAME)" Optional
+    VERSION      STRING="$(INF_VERSION)" Optional BUILD_NUM=$(BUILD_NUMBER)
+  }
